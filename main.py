@@ -58,9 +58,9 @@ def main(args: argparse.Namespace):
             continue
         ell = np.array(data['ell'])
         d_ell = np.array(data['d_ell'])
-        Cl = np.array(data['Cl'])
-        d_Cl_plus = np.array(data['d_Cl_plus'])
-        d_Cl_minus = np.array(data['d_Cl_minus'])
+        Dl = np.array(data['Dl'])
+        d_Dl_plus = np.array(data['d_Dl_plus'])
+        d_Dl_minus = np.array(data['d_Dl_minus'])
         limit = np.array(data['limit'], dtype=bool)
         if "name" in data:
             name = data['name']
@@ -70,13 +70,19 @@ def main(args: argparse.Namespace):
             color = data['color']
         else:
             color = 'black'
+        print('''load data:
+    name: {}, color: {}
+    ell: {}, d_ell: {}, Dl: {}, d_Dl_plus: {}, d_Dl_minus: {},
+              '''.format(name, color,
+                         len(ell), len(d_ell),
+                         len(Dl), len(d_Dl_plus), len(d_Dl_minus)))
         notlim = np.logical_not(limit)
-        ax11.errorbar(ell[notlim], Cl[notlim],
-                      yerr=[d_Cl_minus[notlim], d_Cl_plus[notlim]],
+        ax11.errorbar(ell[notlim], Dl[notlim],
+                      yerr=[d_Dl_minus[notlim], d_Dl_plus[notlim]],
                       xerr=d_ell[notlim],
                       label=None, fmt='o', color=color)
-        lims = np.where(Cl[limit] > 0, Cl[limit] + d_Cl_plus[limit],
-                        d_Cl_plus[limit])
+        lims = np.where(Dl[limit] > 0, Dl[limit] + d_Dl_plus[limit],
+                        d_Dl_plus[limit])
         ax11.errorbar(ell[limit], lims, xerr=d_ell[limit],
                       label=None, color=color, marker='v', ls='None')
         txt = fig1.text(text_pos[0], text_pos[1], name, wrap=True, color=color,
