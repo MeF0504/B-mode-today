@@ -79,7 +79,7 @@ def main(args: argparse.Namespace):
                         d_Cl_plus[limit])
         ax11.errorbar(ell[limit], lims, xerr=d_ell[limit],
                       label=None, color=color, marker='v', ls='None')
-        txt = fig1.text(*text_pos, name, wrap=True, color=color,
+        txt = fig1.text(text_pos[0], text_pos[1], name, wrap=True, color=color,
                         ha='left', va='top')
         bbox = txt.get_window_extent()
         text_pos[1] = bbox.y0 / fig1.figbbox.y1 - 0.005
