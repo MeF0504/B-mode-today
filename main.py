@@ -40,6 +40,7 @@ def main(args: argparse.Namespace):
     rect = (0.12, 0.12, 0.65, 0.83)
     fig1 = plt.figure(figsize=figsize)
     ax11 = fig1.add_axes(rect)
+    ax12 = ax11.secondary_xaxis('top')
 
     # calculate the power spectrum
     dls = calc_dl(args.lmax, args.r)
@@ -91,11 +92,15 @@ def main(args: argparse.Namespace):
         text_pos[1] = bbox.y0 / fig1.figbbox.y1 - 0.005
 
     # set the axes
-    if not args.linear:
+    if args.log in ['x', 'both']:
         ax11.set_xscale('log')
+    if args.log in ['y', 'both']:
         ax11.set_yscale('log')
     ax11.set_xlabel(r'Multipole, $\ell$')
     ax11.set_ylabel(r'$(\ell(\ell+1)/2\pi)C_\ell\, \mathrm{[\mu K^2]}$')
+    ax11.set_xlim(xmax=args.lmax)
+    ax11.set_ylim(ymax=args.ymax)
+    ax12.tick_params(labeltop=False)
 
     # save the figure
     output = Path(args.output)
@@ -106,13 +111,16 @@ def main(args: argparse.Namespace):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Plot CMB power spectrum data.')
+    parser = argparse.ArgumentParser(description='Plot CMB power spectrum data.',
+                                     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-r', help='set tensor-to-scalar ratio', nargs='*',
                         type=float, default=[0.0, 0.03])
-    parser.add_argument('-lmax', help='maximum multipole',
-                        type=int, default=2000)
-    parser.add_argument('--linear', help='show the plot in linear scale',
-                        action='store_true')
+    parser.add_argument('-lmax', help='maximum multipole (= x-axis value)',
+                        type=int, default=2500)
+    parser.add_argument('-ymax', help='maximum y-axis value',
+                        type=float, default=1e2)
+    parser.add_argument('--log', help='show the plot in log scale',
+                        choices=['x', 'y', 'both', 'none'], default='both')
     parser.add_argument('-o', '--output', help='output directory',
                         type=str, default='output')
     args = parser.parse_args()
