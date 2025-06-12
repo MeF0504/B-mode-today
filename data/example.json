@@ -1,0 +1,15 @@
+{
+    "doi": "https://doi.org/...",
+    "ref": "https://example.com/hoge.txt",
+    "name": "experiment name",
+    "color": "white",
+    "ignore": true,
+    "ell": [100, 200, 300],
+    "d_ell": [50, 50, 50],
+    "Dl": [0.1, -0.1, 0.0],
+    "d_Dl_plus": [0.01, 0.01, 0.01],
+    "d_Dl_minus": [0.01, 0.01, 0.01],
+    "limit": [false, true, true]
+}
+
+
