@@ -33,7 +33,7 @@ python3 main.py
 1. bug fix template の準備
 
 ## License
-[MIT]()
+[MIT](https://github.com/MeF0504/B-mode-today/blob/main/LICENSE)
 
 ## Author
 [MeF0504](https://github.com/MeF0504)
