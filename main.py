@@ -2,7 +2,7 @@
 
 import argparse
 from pathlib import Path
-import json
+import tomllib
 
 import numpy as np
 import matplotlib as mpl
@@ -35,9 +35,14 @@ def calc_dl(lmax: int, rs: list[float]):
 
 
 def main(args: argparse.Namespace):
+    # load data
+    with open(args.input, 'rb') as f:
+        alldata = tomllib.load(f)
+        fig_conf = alldata.pop('config')
+
     # setting figure
-    figsize = (8, 5)
-    rect = (0.12, 0.12, 0.65, 0.83)
+    figsize = fig_conf.get('figsize', [8, 5])
+    rect = fig_conf.get('rect', [0.12, 0.12, 0.65, 0.83])
     fig1 = plt.figure(figsize=figsize)
     ax11 = fig1.add_axes(rect)
     ax12 = ax11.secondary_xaxis('top')
@@ -52,9 +57,7 @@ def main(args: argparse.Namespace):
     # show observed results
     fig1.canvas.draw()
     text_pos = [rect[0]+rect[2]+0.01, rect[1]+rect[3]-0.02]
-    for path in (Path(__file__).parent/'data').glob('*.json'):
-        with open(path, 'r') as f:
-            data = json.load(f)
+    for exp, data in alldata.items():
         if "ignore" in data and data['ignore']:
             continue
         ell = np.array(data['ell'])
@@ -66,7 +69,7 @@ def main(args: argparse.Namespace):
         if "name" in data:
             name = data['name']
         else:
-            name = path.stem
+            name = exp
         if "color" in data:
             color = data['color']
         else:
@@ -121,6 +124,8 @@ if __name__ == '__main__':
                         type=float, default=1e2)
     parser.add_argument('--log', help='show the plot in log scale',
                         choices=['x', 'y', 'both', 'none'], default='both')
+    parser.add_argument('-i', '--input', help='input data file',
+                        default=str(Path(__file__).parent/'data.toml'))
     parser.add_argument('-o', '--output', help='output directory',
                         type=str, default='output')
     args = parser.parse_args()
