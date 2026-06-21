@@ -39,6 +39,8 @@ def main(args: argparse.Namespace):
     with open(args.input, 'rb') as f:
         alldata = tomllib.load(f)
         fig_conf = alldata.pop('config')
+        xrange = fig_conf.get('xrange', [1, 2500])
+        yrange = fig_conf.get('yrange', [1e-6, 100])
 
     # setting figure
     figsize = fig_conf.get('figsize', [8, 5])
@@ -48,7 +50,7 @@ def main(args: argparse.Namespace):
     ax12 = ax11.secondary_xaxis('top')
 
     # calculate the power spectrum
-    dls = calc_dl(args.lmax, args.r)
+    dls = calc_dl(xrange[1], args.r)
     for r, dl in zip(args.r, dls):
         ax11.plot(np.arange(len(dl))[2:], dl[2:, 2],
                   label=r'$r={:.2f}$'.format(r))
@@ -101,8 +103,8 @@ def main(args: argparse.Namespace):
         ax11.set_yscale('log')
     ax11.set_xlabel(r'Multipole, $\ell$')
     ax11.set_ylabel(r'$(\ell(\ell+1)/2\pi)C_\ell\, \mathrm{[\mu K^2]}$')
-    ax11.set_xlim(xmax=args.lmax)
-    ax11.set_ylim(ymax=args.ymax)
+    ax11.set_xlim(xrange)
+    ax11.set_ylim(yrange)
     ax12.tick_params(labeltop=False)
 
     # save the figure
@@ -118,10 +120,6 @@ if __name__ == '__main__':
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-r', help='set tensor-to-scalar ratio', nargs='*',
                         type=float, default=[0.0, 0.03])
-    parser.add_argument('-lmax', help='maximum multipole (= x-axis value)',
-                        type=int, default=2500)
-    parser.add_argument('-ymax', help='maximum y-axis value',
-                        type=float, default=1e2)
     parser.add_argument('--log', help='show the plot in log scale',
                         choices=['x', 'y', 'both', 'none'], default='both')
     parser.add_argument('-i', '--input', help='input data file',

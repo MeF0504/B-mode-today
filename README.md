@@ -31,10 +31,10 @@ Data are maintained by `data.toml` file.
         Power spectrum ($= \ell (\ell+1)/2\pi\ C_\ell$) values (y-axis) of data points.
         The unit is $\mathrm{[\mu K^2]}$.
     - d_Dl_plus (list of float, required)  
-        Upper side error bar length of y-axis of data points.
+        Upper side error bar length (95% C.L.) of y-axis for each data point.
         The unit is $\mathrm{[\mu K^2]}$.
     - d_Dl_minus (list of float, required)  
-        Lower side error bar length of y-axis of data points.
+        Lower side error bar length (95% C.L.) of y-axis for each data point.
         The unit is $\mathrm{[\mu K^2]}$.
     - limit (list of bool, required)  
         If true, it is plotted as the upper limit value.
