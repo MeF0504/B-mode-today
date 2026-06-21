@@ -54,7 +54,8 @@ def main(args: argparse.Namespace):
     for r, dl in zip(args.r, dls):
         ax11.plot(np.arange(len(dl))[2:], dl[2:, 2],
                   label=r'$r={:.2f}$'.format(r))
-    ax11.legend()
+    if len(args.r) != 0:
+        ax11.legend()
 
     # show observed results
     fig1.canvas.draw()
