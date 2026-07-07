@@ -2,6 +2,8 @@
 
 Plot CMB B-mode power spectrum and data points.
 
+![example](examples/B-mode-today.jpg)
+
 ## How to make plot
 ```shell
 # show usage
@@ -31,10 +33,10 @@ Data are maintained by `data.toml` file.
         Power spectrum ($= \ell (\ell+1)/2\pi\ C_\ell$) values (y-axis) of data points.
         The unit is $\mathrm{[\mu K^2]}$.
     - d_Dl_plus (list of float, required)  
-        Upper side error bar length (95% C.L.) of y-axis for each data point.
+        Upper side error bar length (68% C.L.) of y-axis for each data point.
         The unit is $\mathrm{[\mu K^2]}$.
     - d_Dl_minus (list of float, required)  
-        Lower side error bar length (95% C.L.) of y-axis for each data point.
+        Lower side error bar length (68% C.L.) of y-axis for each data point.
         The unit is $\mathrm{[\mu K^2]}$.
     - limit (list of bool, required)  
         If true, it is plotted as the upper limit value.

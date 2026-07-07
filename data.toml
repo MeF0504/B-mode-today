@@ -57,7 +57,7 @@ limit = [true, true, true, true, true, true, true, true, true, true, true]
 doi = "https://doi.org/10.1103/PhysRevD.101.122003"
 name = "SPTPol (2020)"
 color = "#003080"
-ignore = false
+ignore = true
 ell = [101.5, 226.5, 501.5, 901.5, 1301.5, 1701.5, 2101.5]
 d_ell = [49.5, 74.5, 199.5, 199.5, 199.5, 199.5, 199.5]
 Dl = [0.004, 0.030, 0.094, 0.118, 0.097, 0.119, 0.064]
@@ -87,7 +87,44 @@ ell = [45.5, 73.0, 105.5, 139.0, 171.5, 202.5, 232.0, 264.0, 294.5]
 d_ell = [8.5, 13.0, 14.5, 16.0, 18.5, 21.5, 26.0, 28.0, 31.5]
 Dl = [0.00141, 0.00170, 0.00517, 0.00678, 0.00870, 0.01450, 0.02300, 0.02790, 0.02070]
 d_Dl_plus = [0.00286, 0.00177, 0.00321, 0.00362, 0.00520, 0.00670, 0.00880, 0.00970, 0.01130]
-d_Dl_minus = [0.00141, 0.00129, 0.00237, 0.00310, 0.00484, 0.00637, 0.00810, 0.00890
-, 0.01166]
+d_Dl_minus = [0.00141, 0.00129, 0.00237, 0.00310, 0.00484, 0.00637, 0.00810, 0.00890, 0.01166]
 limit = [false, false, false, false, false, false, false, false, false]
 
+[spt3g_95]
+# table III
+doi = "https://doi.org/10.1103/33wm-c6pt"
+name = "SPT-3G D1: 95 GHz (2025)"
+ignore = false
+color = "#7a8fef"
+ell = [75, 150, 245, 346, 447]
+d_ell = [35, 50, 50, 50, 50]
+Dl = [0.009, 0.010, 0.039, 0.034, 0.057]
+d_Dl_plus = [0.005, 0.006, 0.006, 0.009, 0.013]
+d_Dl_minus = [0.005, 0.006, 0.006, 0.009, 0.013]
+limit = [false, false, false, false, false]
+
+[spt3g_150]
+# table III
+doi = "https://doi.org/10.1103/33wm-c6pt"
+name = "SPT-3G D1: 150 GHz (2025)"
+ignore = true
+color = "#7a8fef"
+ell = [75, 150, 245, 346, 447]
+d_ell = [35, 50, 50, 50, 50]
+Dl = [0.042, 0.012, 0.032, 0.040, 0.063]
+d_Dl_plus = [0.009, 0.007, 0.006, 0.008, 0.011]
+d_Dl_minus = [0.009, 0.007, 0.006, 0.008, 0.011]
+limit = [false, false, false, false, false]
+
+[spt3g_220]
+# table III
+doi = "https://doi.org/10.1103/33wm-c6pt"
+name = "SPT-3G D1: 220 GHz (2025)"
+ignore = true
+color = "#7a8fef"
+ell = [75, 150, 245, 346, 447]
+d_ell = [35, 50, 50, 50, 50]
+Dl = [0.165, 0.211, 0.133, -0.058, 0.341]
+d_Dl_plus = [0.113, 0.092, 0.067, 0.114, 0.138]
+d_Dl_minus = [0.113, 0.092, 0.067, 0.114, 0.138]
+limit = [false, false, false, true, false]
