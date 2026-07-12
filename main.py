@@ -109,10 +109,10 @@ def main(args: argparse.Namespace):
     ax12.tick_params(labeltop=False)
 
     # save the figure
-    output = Path(args.output)
-    if not output.is_dir():
-        output.mkdir(parents=True)
-    plt.savefig(output/'B-mode-today.pdf')
+    outfile = Path(args.output)
+    if not outfile.parent.is_dir():
+        outfile.parent.mkdir(parents=True)
+    plt.savefig(outfile)
     plt.show()
 
 
@@ -125,7 +125,7 @@ if __name__ == '__main__':
                         choices=['x', 'y', 'both', 'none'], default='both')
     parser.add_argument('-i', '--input', help='input data file',
                         default=str(Path(__file__).parent/'data.toml'))
-    parser.add_argument('-o', '--output', help='output directory',
-                        type=str, default='output')
+    parser.add_argument('-o', '--output', help='output image file', type=str,
+                        default=str(Path(__file__).parent/'output/B-mode-today.pdf'))
     args = parser.parse_args()
     main(args)
